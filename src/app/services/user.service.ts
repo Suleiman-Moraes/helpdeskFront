@@ -27,4 +27,12 @@ export class UserService {
   findAll(page: number, count: number){
     return this.http.get(`${HEPL_DESK_API_USER}/${page}/${count}`);
   }
+
+  findById(id: string){
+    return this.http.get(`${HEPL_DESK_API_USER}/${id}`);
+  }
+
+  delete(id: string){
+    return this.http.delete(`${HEPL_DESK_API_USER}/${id}`);
+  }
 }
