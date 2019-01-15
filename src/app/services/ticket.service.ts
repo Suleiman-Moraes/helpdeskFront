@@ -33,8 +33,7 @@ export class TicketService {
     return this.http.delete(`${HEPL_DESK_API_TICKET}/${id}`);
   }
 
-  /* findByParams(pane: number, count: number, number: number, title: string, status: string, priority: string, assigned: boolean){ */
-  findByParams(pane: number, count: number, assigned: boolean, ticket: Ticket){
+  findByParams(page: number, count: number, assigned: boolean, ticket: Ticket){
     var naoInformado: string = 'uninformed';
     ticket.numero = ticket == null ? 0 : ticket.numero;
     ticket.titulo = ticket.titulo == '' ? naoInformado : ticket.titulo;

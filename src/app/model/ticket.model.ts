@@ -3,7 +3,7 @@ export class Ticket{
     constructor(
         public id: string,
         public data: string,
-        public numero: number;
+        public numero: number,
         public titulo: string,
         public descricao: string,
         public imagem: string,
