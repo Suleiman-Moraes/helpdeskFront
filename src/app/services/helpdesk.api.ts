@@ -1,0 +1,7 @@
+export const HEPL_DESK_API: string = `${HEPL_DESK}${HEPL_DESK_API_COMPLEMENTO}`;
+export const HEPL_DESK_API_AUTH: string = `${HEPL_DESK}${HEPL_DESK_API_COMPLEMENTO}${HEPL_DESK_API_AUTH_COMPLEMENTO}`;
+export const HEPL_DESK_API_USER: string = `${HEPL_DESK}${HEPL_DESK_API_COMPLEMENTO}${HEPL_DESK_API_USER_COMPLEMENTO}`;
+export const HEPL_DESK: string = 'http://10.243.1.27:8080/helpdesk';
+const HEPL_DESK_API_COMPLEMENTO: string = '/api';
+const HEPL_DESK_API_AUTH_COMPLEMENTO: string = '/auth';
+const HEPL_DESK_API_USER_COMPLEMENTO: string = '/user';
