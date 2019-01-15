@@ -10,29 +10,29 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  login(user: User){
+  login(user: User) {
     return this.http.post(`${HEPL_DESK_API_AUTH}`, user);
   }
 
-  createOrUpdate(user: User){
-    if(user.id != null && user.id.trim() != ''){
+  createOrUpdate(user: User) {
+    if (user.id != null && user.id.trim() != '') {
       return this.http.put(`${HEPL_DESK_API_USER}`, user);
     }
-    else{
+    else {
       user.id = null;
       return this.http.post(`${HEPL_DESK_API_USER}`, user);
     }
   }
 
-  findAll(page: number, count: number){
+  findAll(page: number, count: number) {
     return this.http.get(`${HEPL_DESK_API_USER}/${page}/${count}`);
   }
 
-  findById(id: string){
+  findById(id: string) {
     return this.http.get(`${HEPL_DESK_API_USER}/${id}`);
   }
 
-  delete(id: string){
+  delete(id: string) {
     return this.http.delete(`${HEPL_DESK_API_USER}/${id}`);
   }
 }
