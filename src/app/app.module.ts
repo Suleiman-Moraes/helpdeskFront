@@ -1,5 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
+import { SharedService } from './services/shared.service';
+import { UserService } from './services/user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,9 +26,11 @@ import { routes } from './app.routes';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
     routes
   ],
-  providers: [],
+  providers: [UserService, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
