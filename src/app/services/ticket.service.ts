@@ -1,4 +1,4 @@
-import { HEPL_DESK_API_TICKET } from './helpdesk.api';
+import { HELP_DESK_API_TICKET } from './helpdesk.api';
 import { Ticket } from './../model/ticket.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -12,25 +12,25 @@ export class TicketService {
 
   createOrUpdate(ticket: Ticket){
     if(ticket.id != null && ticket.id.trim() != ''){
-      return this.http.put(`${HEPL_DESK_API_TICKET}`, ticket);
+      return this.http.put(`${HELP_DESK_API_TICKET}`, ticket);
     }
     else{
       ticket.id = null;
       ticket.statusEnum = 'NOVO';
-      return this.http.post(`${HEPL_DESK_API_TICKET}`, ticket);
+      return this.http.post(`${HELP_DESK_API_TICKET}`, ticket);
     }
   }
 
   findAll(page: number, count: number){
-    return this.http.get(`${HEPL_DESK_API_TICKET}/${page}/${count}`);
+    return this.http.get(`${HELP_DESK_API_TICKET}/${page}/${count}`);
   }
 
   findById(id: string) {
-    return this.http.get(`${HEPL_DESK_API_TICKET}/${id}`);
+    return this.http.get(`${HELP_DESK_API_TICKET}/${id}`);
   }
 
   delete(id: string) {
-    return this.http.delete(`${HEPL_DESK_API_TICKET}/${id}`);
+    return this.http.delete(`${HELP_DESK_API_TICKET}/${id}`);
   }
 
   findByParams(page: number, count: number, assigned: boolean, ticket: Ticket){
@@ -39,6 +39,6 @@ export class TicketService {
     ticket.titulo = ticket.titulo == '' ? naoInformado : ticket.titulo;
     ticket.statusEnum = ticket.statusEnum == '' ? naoInformado : ticket.statusEnum;
     ticket.prioridadeEnum = ticket.prioridadeEnum == '' ? naoInformado : ticket.prioridadeEnum;
-    return this.http.get(`${HEPL_DESK_API_TICKET}/${page}/${count}/${ticket.numero}/${ticket.titulo}/${ticket.statusEnum}/${ticket.prioridadeEnum}/${assigned}`);
+    return this.http.get(`${HELP_DESK_API_TICKET}/${page}/${count}/${ticket.numero}/${ticket.titulo}/${ticket.statusEnum}/${ticket.prioridadeEnum}/${assigned}`);
   }
 }
