@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/model/user.model';
 import { ActivatedRoute } from '@angular/router';
+import { ResponseApi } from 'src/app/model/response-api';
 
 @Component({
   selector: 'app-user-new',
@@ -27,11 +28,30 @@ export class UserNewComponent implements OnInit {
     this.shared = SharedService.getInstance();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   findById(id: string){
-    this.userService.findById(id).subscribe((responseApi: ResponseApi))
+    this.userService.findById(id).subscribe((responseApi: ResponseApi) => {
+      this.user = responseApi.data;
+      this.user.password = '';
+    }, err => {
+
+    })
+  }
+
+  private showMessage(message: {type: string, text: string}): void{
+    this.message = message;
+    this.buildClasses(message.type);
+    setTimeout(() => {
+      this.message = undefined;
+    }, 3000);
+  }
+
+  private buildClasses(type: string): void{
+    this.classCss = {
+      'alert': true
+    }
+    this.classCss['alert-' + type] = true;
   }
 
 }
