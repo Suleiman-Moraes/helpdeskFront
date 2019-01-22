@@ -35,7 +35,19 @@ export class UserNewComponent implements OnInit {
       this.user = responseApi.data;
       this.user.password = '';
     }, err => {
+      this.showMessage({
+        type: 'error',
+        text: err['error']['errors'][0]
+      });
+    });
+  }
 
+  register(){
+    this.message = {};
+    this.userService.createOrUpdate(this.user).subscribe((responseApi: ResponseApi) => {
+      this.user = new User('', '', '', '');
+      let userRet: User = responseApi.data;
+      this.form.resetForm
     })
   }
 
