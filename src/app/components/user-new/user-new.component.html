@@ -30,10 +30,24 @@
             <span class="help-block" *ngIf="password.invalid && password.dirty">Password é requerido</span>
           </div>
         </div>
+
+        <div [ngClass]="getFormGroupClass(profileEnum.invalid, profileEnum.dirty)">
+          <label for="inputProfileEnum" class="col-sm-2 control-label">Profile</label>
+          <div class="col-sm-10">
+            <select [(ngModel)]="user.profileEnum"
+              class="form-control select2" id="inputProfileEnum" name="profileEnum"
+              #profileEnum="ngModel" style="width: 100%" required>
+              <option>ROLE_ADMIN</option>
+              <option>ROLE_CUSTOMER</option>
+              <option>ROLE_TECHNICIAN</option>
+            </select>
+            <span class="help-block" *ngIf="profileEnum.invalid && profileEnum.dirty">Profile é requerido</span>
+          </div>
+        </div>
+
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
-        <button type="submit" (click)="cancelLogin()" class="btn btn-default">Cancel</button>
         <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Sign in</button>
       </div>
       <!-- /.box-footer -->
