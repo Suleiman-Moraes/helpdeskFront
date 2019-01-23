@@ -28,7 +28,12 @@ export class UserNewComponent implements OnInit {
     this.shared = SharedService.getInstance();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    let id: string = this.route.snapshot.params['id'];
+    if(id != undefined){
+      this.findById(id);
+    }
+  }
 
   findById(id: string){
     this.userService.findById(id).subscribe((responseApi: ResponseApi) => {
@@ -47,8 +52,17 @@ export class UserNewComponent implements OnInit {
     this.userService.createOrUpdate(this.user).subscribe((responseApi: ResponseApi) => {
       this.user = new User('', '', '', '');
       let userRet: User = responseApi.data;
-      this.form.resetForm
-    })
+      this.form.resetForm();
+      this.showMessage({
+        type: 'success',
+        text: `Registered ${userRet.email} successfully`
+      });
+    }, err => {
+      this.showMessage({
+        type: 'error',
+        text: err['error']['errors'][0]
+      });
+    });
   }
 
   private showMessage(message: {type: string, text: string}): void{
@@ -64,6 +78,14 @@ export class UserNewComponent implements OnInit {
       'alert': true
     }
     this.classCss['alert-' + type] = true;
+  }
+
+  getFormGroupClass(isInvalid: boolean, isDirty): {}{
+    return{
+      'form-group': true,
+      'has-error': isInvalid && isDirty,
+      'has-sucess': !isInvalid && isDirty
+    };
   }
 
 }
