@@ -1,3 +1,4 @@
+import { DialogService } from './dialog.service';
 import { AuthGuard } from './components/security/auth.guard';
 import { AuthInterceptor } from './components/security/auth.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -39,6 +40,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
   providers: [
     UserService, 
     SharedService,
+    DialogService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

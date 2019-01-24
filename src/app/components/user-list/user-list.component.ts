@@ -45,7 +45,49 @@ export class UserListComponent implements OnInit {
   }
 
   edit(id: string){
-    this.router.navigate(['/user-new'])
+    this.router.navigate(['/user-new', id])
+  }
+
+  delete(id: string){
+    this.dialogService.confirm(' Você realmente deseja deletar o Usuário? ').then((candelete: boolean) => {
+      if(candelete){
+        this.message = {};
+        this.userService.delete(id).subscribe((responseApi: ResponseApi) =>{
+          this.showMessage({
+            type: 'success',
+            text: 'Record delete'
+          });
+          this.findAll(this.page, this.count);
+        }, err =>{
+          this.showMessage({
+            type: 'error',
+            text: err['error']['errors'][0]
+          });
+        });
+      }
+    });
+  }
+
+  setNextPage(event: any){
+    event.preventDefault();
+    if(this.page + 1 < this.pages.length){
+      this.page = this.page + 1;
+      this.findAll(this.page, this.count);
+    }
+  }
+
+  setPreviousPage(event: any){
+    event.preventDefault();
+    if(this.page > 0){
+      this.page = this.page - 1;
+      this.findAll(this.page, this.count);
+    }
+  }
+
+  setPage(i, event: any){
+    event.preventDefault();
+    this.page = i;
+    this.findAll(this.page, this.count);
   }
 
   private showMessage(message: {type: string, text: string}): void{
