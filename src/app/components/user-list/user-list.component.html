@@ -11,13 +11,12 @@
       <div class="box-body">
         <table class="table table-bordered">
           <tr>
-            <th style="width: 10px">#</th>
             <th>Email</th>
             <th>Profile</th>
             <th style="width: 10px">&nbsp;</th>
             <th style="width: 10px">&nbsp;</th>
           </tr>
-          <tr **ngFor="let user of listUser">
+          <tr *ngFor="let user of listUser">
             <td>{{ user.email }}</td>
             <td>{{ user.profileEnum }}</td>
             <td><button class="btn btn-primary" (click)="edit(user.id)">Edit</button></td>
@@ -28,9 +27,11 @@
       <!-- /.box-body -->
       <div class="box-footer clearfix">
         <ul class="pagination pagination-sm no-margin pull-right">
-          <li><a href="#" (click)="setPreviousPage($event)">&laquo;</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#" (click)="setNextPage($event)">&raquo;</a></li>
+          <li><a href="" (click)="setPreviousPage($event)">&laquo;</a></li>
+          <li *ngFor="let p of pages; let i = index">
+            <a [ngClass]="{'pagination-focus': i == page}" href="" (click)="setPage(i, $event)">{{ i+1 }}</a>
+          </li>
+          <li><a href="" (click)="setNextPage($event)">&raquo;</a></li>
         </ul>
       </div>
     </div>
