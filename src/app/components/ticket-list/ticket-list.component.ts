@@ -53,7 +53,6 @@ export class TicketListComponent implements OnInit {
     this.count = 5;
     this.ticketService.findByParams(this.page, this.count, this.assignedToMe, this.ticketFilter).subscribe((responseApi: ResponseApi) => {
       this.ticketFilter.titulo = this.ticketFilter.titulo == this.uninformed ? '' : this.ticketFilter.titulo;
-      this.ticketFilter.numero = this.ticketFilter.numero == 0 ? null : this.ticketFilter.numero;
       this.listTicket = responseApi['data']['content'];
       this.pages = new Array(responseApi['data']['totalPages']);
     }, err => {
