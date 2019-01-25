@@ -33,6 +33,10 @@ export class TicketService {
     return this.http.delete(`${HELP_DESK_API_TICKET}/${id}`);
   }
 
+  changeStatus(status: string, ticket: Ticket){
+    return this.http.put(`${HELP_DESK_API_TICKET}/${ticket.id}/${status}`,ticket);
+  }
+
   findByParams(page: number, count: number, assigned: boolean, ticket: Ticket){
     var naoInformado: string = 'uninformed';
     ticket.numero = ticket == null ? 0 : ticket.numero;
