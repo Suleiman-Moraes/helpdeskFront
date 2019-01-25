@@ -1,3 +1,4 @@
+import { ChangeStatus } from './change-status.model';
 import { User } from './user.model';
 export class Ticket{
     constructor(
@@ -11,6 +12,6 @@ export class Ticket{
         public prioridadeEnum: string,
         public user: User,
         public assignedUser: User,
-        public listaChangeStatus: Array<string>
+        public listaChangeStatus: Array<ChangeStatus>
     ){}
 }
