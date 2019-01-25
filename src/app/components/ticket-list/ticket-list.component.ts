@@ -19,7 +19,7 @@ export class TicketListComponent implements OnInit {
   pages: Array<number>;
   shared: SharedService;
   message: {};
-  classCss: {};
+  classCss: {}; 
   listTicket = [];
   ticketFilter = new Ticket('', '', 0, '', '', '', '', '', null, null, null);
   private uninformed: string = 'uninformed';
