@@ -11,7 +11,7 @@
 
       <div class="box-body">
 
-        <div class="form-group" *ngIf="shared.user.profileEnum = 'TECHNICIAN'">
+        <div class="form-group" *ngIf="shared.user.profileEnum == 'TECHNICIAN'">
           <div class="checkbox">
             <label>
               <input type="checkbox" [(ngModel)]="assignedToMe" name="assignedToMe" id="assignedToMe">
@@ -39,7 +39,7 @@
           <div class="col-sm-10">
             <select [(ngModel)]="ticketFilter.statusEnum" class="form-control select2" id="inputStatus" name="status"
               style="width: 100%">
-              <option value>Selecione</option>
+              <option selected="selected" disabled="disabled" value>Selecione</option>
               <option>NOVO</option>
               <option>DESIGNADO</option>
               <option>RESOLVIDO</option>
@@ -54,7 +54,7 @@
             <div class="col-sm-10">
               <select [(ngModel)]="ticketFilter.prioridadeEnum" class="form-control select2" id="inputPrioridadeEnum"
                 name="prioridadeEnum" style="width: 100%">
-                <option value>Selecione</option>
+                <option selected="selected" disabled="disabled" value>Selecione</option>
                 <option>ALTA</option>
                 <option>NORMAL</option>
                 <option>BAIXA</option>
@@ -76,15 +76,23 @@
               <th>Prioridade</th>
               <th>Status</th>
               <th>Owner</th>
-              <th style="width: 10px" *ngIf="shared.user.profileEnum = 'TECHNICIAN'">&nbsp;</th>
-              <th style="width: 10px">&nbsp;</th>
+              <th style="width: 10px" *ngIf="shared.user.profileEnum == 'CUSTOMER'">&nbsp;</th>
+              <th style="width: 10px" *ngIf="shared.user.profileEnum == 'CUSTOMER'">&nbsp;</th>
               <th style="width: 10px">&nbsp;</th>
             </tr>
-            <tr *ngFor="let user of listUser">
-              <td>{{ user.email }}</td>
-              <td>{{ user.profileEnum }}</td>
-              <td><button class="btn btn-primary" (click)="edit(user.id)">Edit</button></td>
-              <td><button class="btn btn-danger" (click)="delete(user.id)">Delete</button></td>
+            <tr *ngFor="let ticket of listTicket">
+              <td>{{ ticket.numero }}</td>
+              <td>{{ ticket.titulo }}</td>
+              <td>{{ ticket.prioridadeEnum }}</td>
+              <td>{{ ticket.statusEnum }}</td>
+              <td>{{ ticket.user.email }}</td>
+              <td *ngIf="shared.user.profileEnum == 'CUSTOMER'">
+                <button class="btn btn-primary" (click)="edit(ticket.id)">Edit</button>
+              </td>
+              <td *ngIf="shared.user.profileEnum == 'CUSTOMER'">
+                <button class="btn btn-danger" (click)="delete(ticket.id)">Delete</button>
+              </td>
+              <td><button class="btn btn-success" (click)="detail(ticket.id)">Detail</button></td>
             </tr>
           </table>
         </div>
