@@ -15,7 +15,7 @@ export class SummaryComponent implements OnInit {
   classCss: {};
 
   constructor(
-    private ticketService: TicketService
+    private ticketService: TicketService,
   ) {}
 
   ngOnInit() {
