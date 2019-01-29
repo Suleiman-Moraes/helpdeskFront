@@ -36,7 +36,7 @@
                 </tr>
                 <tr *ngFor="let change of ticket.listaChangeStatus">
                   <td>{{ change?.userChange.email }}</td>
-                  <td>{{ change?.dataAlteracao.email | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                  <td>{{ change?.dataAlteracao | date:'dd/MM/yyyy HH:mm:ss' }}</td>
                   <td>{{ change?.statusEnum }}</td>
                 </tr>
               </table>
@@ -45,7 +45,25 @@
         </ul>
       </div>
       <div class="box-footer">
-        <button (click)="changeStatus()"></button>
+        <button *ngIf="shared.user.profileEnum == 'TECHNICIAN' && ticket.statusEnum == 'NOVO'" 
+          (click)="changeStatus('DESIGNADO')"
+          class="btn btn-primary">Accept</button>
+
+        <button *ngIf="shared.user.profileEnum == 'TECHNICIAN' && (ticket.statusEnum == 'DESIGNADO' || ticket.statusEnum == 'DESAPROVADO')" 
+          (click)="changeStatus('RESOLVIDO')"
+          class="btn btn-primary">Solve</button>
+
+        <button *ngIf="shared.user.profileEnum == 'CUSTOMER' && ticket.statusEnum == 'RESOLVIDO'" 
+          (click)="changeStatus('APROVADO')"
+          class="btn btn-primary">Approve</button>
+
+        <button *ngIf="shared.user.profileEnum == 'CUSTOMER' && ticket.statusEnum == 'RESOLVIDO'" 
+          (click)="changeStatus('DESAPROVADO')"
+          class="btn btn-primary">Disapprove</button>
+
+        <button *ngIf="shared.user.profileEnum == 'TECHNICIAN' && ticket.statusEnum == 'APROVADO'" 
+          (click)="changeStatus('FECHADO')"
+          class="btn btn-primary">Close</button>
       </div>
     </form>
   </div>
