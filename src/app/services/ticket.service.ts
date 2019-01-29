@@ -1,4 +1,4 @@
-import { HELP_DESK_API_TICKET } from './helpdesk.api';
+import { HELP_DESK_API_TICKET, HELP_DESK_API_SUMMARY } from './helpdesk.api';
 import { Ticket } from './../model/ticket.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -44,5 +44,9 @@ export class TicketService {
     ticket.statusEnum = ticket.statusEnum == '' ? naoInformado : ticket.statusEnum;
     ticket.prioridadeEnum = ticket.prioridadeEnum == '' ? naoInformado : ticket.prioridadeEnum;
     return this.http.get(`${HELP_DESK_API_TICKET}/${page}/${count}/${ticket.numero}/${ticket.titulo}/${ticket.statusEnum}/${ticket.prioridadeEnum}/${assigned}`);
+  }
+
+  summary(){
+    return this.http.get(`${HELP_DESK_API_SUMMARY}`);
   }
 }
